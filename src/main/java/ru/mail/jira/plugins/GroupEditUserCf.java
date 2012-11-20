@@ -8,21 +8,25 @@ import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.bc.user.search.UserPickerSearchService;
+import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.TextCFType;
+import com.atlassian.jira.issue.customfields.converters.UserConverter;
+import com.atlassian.jira.issue.customfields.impl.UserCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
- * Text field.
+ * User field.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditTextCf
-    extends TextCFType
+public class GroupEditUserCf
+    extends UserCFType
 {
     /**
      * Plugin data.
@@ -37,13 +41,17 @@ public class GroupEditTextCf
     /**
      * Constructor.
      */
-    public GroupEditTextCf(
+    public GroupEditUserCf(
         CustomFieldValuePersister customFieldValuePersister,
+        UserConverter userConverter,
         GenericConfigManager genericConfigManager,
+        ApplicationProperties applicationProperties,
+        JiraAuthenticationContext authenticationContext,
+        UserPickerSearchService searchService,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, genericConfigManager);
+        super(customFieldValuePersister, userConverter, genericConfigManager, applicationProperties, authenticationContext, searchService);
         this.data = data;
         this.grMgr = grMgr;
     }

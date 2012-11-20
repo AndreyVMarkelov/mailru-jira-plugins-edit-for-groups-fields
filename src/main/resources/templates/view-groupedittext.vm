@@ -1,3 +1,11 @@
 ## Created by Andrey Markelov 19-11-2012.
 ## Copyright Mail.Ru Group 2012. All rights reserved.
-view-groupedittext.vm
+#if($canView)
+#if ($value)
+  #if (${displayParameters.excel_view})
+    $textutils.br($textutils.htmlEncode($!value.toString(), false))
+  #else
+    $!value.toString()
+  #end
+#end
+#end

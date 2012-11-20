@@ -9,7 +9,8 @@ import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.TextCFType;
+import com.atlassian.jira.issue.customfields.converters.DoubleConverter;
+import com.atlassian.jira.issue.customfields.impl.NumberCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -17,12 +18,12 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
- * Text field.
+ * Number field.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditTextCf
-    extends TextCFType
+public class GroupEditNumberCf
+    extends NumberCFType
 {
     /**
      * Plugin data.
@@ -37,13 +38,14 @@ public class GroupEditTextCf
     /**
      * Constructor.
      */
-    public GroupEditTextCf(
+    public GroupEditNumberCf(
         CustomFieldValuePersister customFieldValuePersister,
+        DoubleConverter doubleConverter,
         GenericConfigManager genericConfigManager,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, genericConfigManager);
+        super(customFieldValuePersister, doubleConverter, genericConfigManager);
         this.data = data;
         this.grMgr = grMgr;
     }
