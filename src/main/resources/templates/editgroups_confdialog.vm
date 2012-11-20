@@ -1,0 +1,29 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+<div id="errorpart" name="errorpart"></div>
+<form class="aui" id="editgroupform" name="editgroupform">
+    <input type="hidden" name="atl_token" value="$atl_token"/>
+    <input type="hidden" name="cfId" value="$cfId"/>
+    <table class="justtable">
+        <tr>
+            <td valign="top">
+                <b>$i18n.getText("edit-groups-cf.listgroups")</b>
+            </td>
+            <td valign="top">
+                <select id="selgroups" name="selgroups" multiple="multiple" size="5">
+                    #foreach($group in $groups)
+                    <option #if($storedData.getGroups().contains($group.getName()))selected="selected"#end value="$group.getName()">$group.getName()</option>
+                    #end
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <b>$i18n.getText("edit-groups-cf.visibleforother")</b>
+            </td>
+            <td valign="top">
+                <input #if($storedData.isVisibleToOther())checked="checked"#end type="checkbox" id="uservisible" name="uservisible" value="true"/>
+            </td>
+        </tr>
+    </table>
+</form>

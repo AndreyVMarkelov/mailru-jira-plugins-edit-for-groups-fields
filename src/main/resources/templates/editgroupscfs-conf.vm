@@ -1,0 +1,77 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+<html>
+  <head>
+    <title>$action.getText("edit-groups-cf.admin.title")</title>
+    <meta name="decorator" content="admin"/>
+    $webResourceManager.requireResource("jira.webresources:global-static")
+    $webResourceManager.requireResource("jira.webresources:jira-global")
+    $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+    $webResourceManager.requireResource("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-resources")
+  </head>
+  <body class="aui">
+    #if($action.hasAdminPermission())
+    <input type="hidden" name="atl_token" id="atl_token" value="$action.getXsrfToken()"/>
+    <table border="0" cellpadding="10" cellspacing="0" width="100%">
+      <tbody>
+        <tr>
+          <td>
+            <table class="jiraform maxWidth">
+              <tr>
+                <td class="jiraformheader">
+                  <h3 class="formtitle">$action.getText("edit-groups-cf.fieldsheader")</h3>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <table class="grid maxWidth">
+                    <thead>
+                      <tr>
+                        <th width="12%">$action.getText("edit-groups-cf.customfieldid")</th>
+                        <th width="12%">$action.getText("edit-groups-cf.customfieldname")</th>
+                        <th width="20%">$action.getText("edit-groups-cf.fieldcontext")</th>
+                        <th width="12%">$action.getText("edit-groups-cf.fieldtype")</th>
+                        <th width="20%">$action.getText("edit-groups-cf.fieldgroups")</th>
+                        <th width="12%">$action.getText("edit-groups-cf.isvisible")</th>
+                        <th width="12%">$action.getText("edit-groups-cf.actions")</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    #foreach($entry in $action.getFields().entrySet())
+                      <tr>
+                        <td width="12%">$entry.value.getCfId()</td>
+                        <td width="12%">$entry.value.getCfName()</td>
+                        <td width="20%">
+                            #if($entry.value.isAllProjects())${action.getText("edit-groups-cf.cfallprojects")}
+                            #else
+                                #foreach($proj in $entry.value.getFieldProjs())
+                                #if($velocityCount > 1), #end${proj}
+                                #end
+                            #end
+                        </td>
+                        <td width="12%">$action.getText($entry.value.getCfType())</td>
+                        <td width="20%">
+                            #foreach($group in $entry.value.getGroups())
+                            #if($velocityCount > 1), #end${group}
+                            #end
+                        </td>
+                        <td width="12%">
+                            <input disabled="disabled" type="checkbox" #if($entry.value.isVisibleToOther())checked="checked"#end/>
+                        </td>
+                        <td width="12%"><a href="#" onclick="configureEnabledForGroupsField(event, '$baseUrl', '$entry.key');">$action.getText("edit-groups-cf.actionconfigure")</a></td>
+                      </tr>
+                    #end
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    #else
+    <div class="errorArea">$action.getText("edit-groups-cf.admin.link.error")</div>
+    #end
+  </body>
+</html>

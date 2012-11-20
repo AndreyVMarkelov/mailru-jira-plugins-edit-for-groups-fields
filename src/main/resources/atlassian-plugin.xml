@@ -1,0 +1,69 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-logo">/media/mcal.png</param>
+        <param name="plugin-icon">/media/mcal.png</param>
+        <param name="vendor-icon">/media/icon.png</param>
+        <param name="vendor-logo">/media/logo.png</param>
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="i18n.groupedit"/>
+
+    <customfield-type key="edit-groups-cf-text"
+                      name="Enabled for groups Text Custom Field"
+                      class="ru.mail.jira.plugins.GroupEditTextCf">
+        <description>This text field is enabled for selected groups</description>
+        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
+    </customfield-type>
+
+    <web-item key="edit-groups-cf-configuration" name="Enabled for groups Custom Fields configuration" section="system.admin/globalsettings" weight="95">
+        <label key="edit-groups-cf.admin.title"/>
+        <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+            <param name="permission">admin</param>
+        </condition>
+        <link linkId="edit-groups-cf-configuration">/secure/GroupEditConfigurationAction!default.jspa</link>
+    </web-item>
+
+    <webwork1 key="edit-groups-cf-action" name="Enabled for groups Custom Fields configure action" class="java.lang.Object">
+        <actions>
+            <action name="ru.mail.jira.plugins.GroupEditConfigurationAction" alias="GroupEditConfigurationAction">
+                <view name="input">/templates/editgroupscfs-conf.vm</view>
+                <view name="success">/templates/editgroupscfs-conf.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <web-resource key="edit-groups-cf-resources" name="Enabled for groups Custom Fields Resurces">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <resource type="download" name="groupedit.js" location="media/groupedit.js"/>
+        <resource type="download" name="groupedit.css" location="media/groupedit.css"/>
+    </web-resource>
+
+    <!-- Rest resources -->
+    <rest key="edit-groups-cf-ws" path="/editgroupscfws" version="1.0">
+        <description>Provides the REST resource for the "ru.mail.jira.plugins.groupeditfiedls" plugin.</description>
+    </rest>
+    <!-- End rest -->
+
+    <!-- Components -->
+    <component key="edit-groups-cf-manager" name="Manager of enabled for groups custom fields" class="ru.mail.jira.plugins.PluginDataImpl"/>
+    <component-import key="pluginSettingsFactory">
+        <interface>com.atlassian.sal.api.pluginsettings.PluginSettingsFactory</interface>
+    </component-import>
+    <component-import key="applicationProperties">
+        <interface>com.atlassian.sal.api.ApplicationProperties</interface>
+    </component-import>
+    <component key="ComponentFactory" class="com.atlassian.jira.util.JiraComponentFactory">
+        <interface>com.atlassian.jira.util.ComponentFactory</interface>
+    </component>
+    <component key="ComponentLocator" class="com.atlassian.jira.util.JiraComponentLocator">
+        <interface>com.atlassian.jira.util.ComponentLocator</interface>
+    </component>
+</atlassian-plugin>
