@@ -1,0 +1,7 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#if($canView)
+#if ($value)
+  $!value.toString()
+#end
+#end

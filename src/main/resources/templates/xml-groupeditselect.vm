@@ -1,0 +1,9 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#if($canView)
+#if($renderedValue)
+<customfieldvalue>$xmlutils.escape($renderedValue)</customfieldvalue>
+#elseif ($value)
+<customfieldvalue><![CDATA[$xmlutils.escapeForCdata($value.toString())]]></customfieldvalue>
+#end
+#end

@@ -17,7 +17,6 @@
         <description>This text field is enabled for selected groups</description>
         <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
         <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
         <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
     </customfield-type>
 
@@ -25,100 +24,123 @@
                       name="Enabled for groups Number Custom Field"
                       class="ru.mail.jira.plugins.GroupEditNumberCf">
         <description>This number field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
+        <resource type="velocity" name="view" location="templates/view-groupeditnumber.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupeditnumber.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupeditnumber.vm"/>
     </customfield-type>
 
     <customfield-type key="edit-groups-cf-user"
                       name="Enabled for groups User Picker Custom Field"
                       class="ru.mail.jira.plugins.GroupEditUserCf">
-        <description>This user picker field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
+        <description>This userpicker field is enabled for selected groups</description>
+        <resource type="velocity" name="view" location="templates/view-groupedituser.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupedituser.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupedituser.vm"/>
     </customfield-type>
 
-<!--     <customfield-type key="edit-groups-cf-date"
-                      name="Enabled for groups Date Custom Field"
-                      class="ru.mail.jira.plugins.GroupEditTextCf">
+    <customfield-type key="edit-groups-cf-date"
+                      name="Enabled for groups Date Picker Custom Field"
+                      class="ru.mail.jira.plugins.GroupEditDateCf">
         <description>This date field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
+        <resource type="velocity" name="view" location="templates/view-groupeditdate.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupeditdate.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupeditdate.vm"/>
     </customfield-type>
 
     <customfield-type key="edit-groups-cf-datetime"
-                      name="Enabled for groups DateTime Custom Field"
-                      class="ru.mail.jira.plugins.GroupEditTextCf">
+                      name="Enabled for groups Date Time Custom Field"
+                      class="ru.mail.jira.plugins.GroupEditDateTimeCf">
         <description>This datetime field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
-    </customfield-type>
-
-    <customfield-type key="edit-groups-cf-datetime"
-                      name="Enabled for groups DateTime Custom Field"
-                      class="ru.mail.jira.plugins.GroupEditTextCf">
-        <description>This datetime field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
+        <resource type="velocity" name="view" location="templates/view-groupeditdatetime.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupeditdatetime.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupeditdatetime.vm"/>
     </customfield-type>
 
     <customfield-type key="edit-groups-cf-select"
-                      name="Enabled for groups Select Custom Field"
-                      class="ru.mail.jira.plugins.GroupEditTextCf">
+                      name="Enabled for groups Select List Custom Field"
+                      class="ru.mail.jira.plugins.GroupEditSelectCf">
         <description>This select field is enabled for selected groups</description>
-        <resource type="velocity" name="view" location="templates/view-groupedittext.vm"/>
-        <resource type="velocity" name="edit" location="templates/edit-groupedittext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/column-view-groupedittext.vm"/>
-        <resource type="velocity" name="xml" location="templates/xml-groupedittext.vm"/>
-    </customfield-type> -->
+        <resource type="velocity" name="view" location="templates/view-groupeditselect.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupeditselect.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupeditselect.vm"/>
+    </customfield-type>
 
-    <customfield-searcher key="textsearcher"
-                          name="Free Text Searcher"
-                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
+    <!-- Searchers -->
+
+    <!-- Text Searchers -->
+    <customfield-searcher key="reference-textsearcher"
+                          name="Reference Free Text Searcher"
                           class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
-        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a free text search.</description>
+        <description>Reference Free Text Searcher</description>
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-text"/>
     </customfield-searcher>
 
-    <customfield-searcher key="numbersearcher"
+    <customfield-searcher key="exacttextsearcher"
+                          name="Exact Text Searcher"
+                          class="com.atlassian.jira.issue.customfields.searchers.ExactTextSearcher">
+        <description>Search for values exactly matching the input</description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-text"/>
+    </customfield-searcher>
+
+    <!-- Number Searchers -->
+    <customfield-searcher key="exactnumber"
                           name="Number Searcher"
-                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
                           class="com.atlassian.jira.issue.customfields.searchers.ExactNumberSearcher">
-        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a number search.</description>
+        <description>Allow searching for a number which exactly matches.</description>
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-number"/>
     </customfield-searcher>
 
-    <customfield-searcher key="numberrangesearcher"
-                          name="Number Range Searcher"
-                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
+    <customfield-searcher key="numberrange"
+                          name="Number range searcher"
                           class="com.atlassian.jira.issue.customfields.searchers.NumberRangeSearcher">
-        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a range number search.</description>
+        <description>Allow searching for a number that is in a given range</description>
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-number-range.vm"/>
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-number-range.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-number"/>
     </customfield-searcher>
 
-    <customfield-searcher key="userpickersearcher" name="Reference User Picker Searcher"
-                          i18n-name-key="module.customfieldtype.userpickersearcher.name"
+    <!-- User Searcher -->
+    <customfield-searcher key="userpickersearcher"
+                          name="User Picker Searcher"
                           class="com.atlassian.jira.issue.customfields.searchers.UserPickerSearcher">
-        <description>Reference User Picker Searcher</description>
+        <description>Allow to search for a user using a userpicker.</description>
         <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-user.vm"/>
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-userpicker.vm"/>
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-user"/>
+    </customfield-searcher>
+
+    <!-- Date Searcher -->
+    <customfield-searcher key="daterange"
+                          name="Date Range picker"
+                          class="com.atlassian.jira.issue.customfields.searchers.DateRangeSearcher">
+        <description>Allow searching for a date that is between two other dates</description>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-date"/>
+    </customfield-searcher>
+
+    <!-- Date Time Searcher -->
+    <customfield-searcher key="reference-datetimesearcher"
+                          name="Reference Date Time Range picker"
+                          class="com.atlassian.jira.issue.customfields.searchers.DateTimeRangeSearcher">
+        <description>Reference Date Time picker for searching Date Time custom fields</description>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-datetime"/>
+    </customfield-searcher>
+
+    <!-- Select Searcher -->
+    <customfield-searcher key="selectsearcher"
+                          name="Select List Searcher"
+                          class="com.atlassian.jira.issue.customfields.searchers.SelectSearcher">
+        <description>Search for values using a select list.</description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-select.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-htmltext.vm"/>
+        <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-htmltext.vm"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-select"/>
     </customfield-searcher>
 
     <web-item key="edit-groups-cf-configuration" name="Enabled for groups Custom Fields configuration" section="system.admin/globalsettings" weight="95">

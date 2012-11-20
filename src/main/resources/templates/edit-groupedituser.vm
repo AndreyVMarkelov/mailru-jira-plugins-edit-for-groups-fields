@@ -1,0 +1,7 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#if($canView)
+#customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+#userPicker ($action $customField.id $value false $null "" $canPerformAjaxSearch $ajaxLimit)
+#customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+#end
