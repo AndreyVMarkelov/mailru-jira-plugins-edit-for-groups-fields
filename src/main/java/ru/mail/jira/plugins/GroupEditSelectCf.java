@@ -17,6 +17,7 @@ import com.atlassian.jira.issue.customfields.manager.OptionsManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
@@ -42,13 +43,21 @@ public class GroupEditSelectCf
      */
     public GroupEditSelectCf(
         CustomFieldValuePersister customFieldValuePersister,
-        StringConverter stringConverter, SelectConverter selectConverter,
+        StringConverter stringConverter,
+        SelectConverter selectConverter,
         OptionsManager optionsManager,
         GenericConfigManager genericConfigManager,
+        JiraBaseUrls jiraBaseUrls,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, stringConverter, selectConverter, optionsManager, genericConfigManager);
+        super(
+            customFieldValuePersister,
+            stringConverter,
+            selectConverter,
+            optionsManager,
+            genericConfigManager,
+            jiraBaseUrls);
         this.data = data;
         this.grMgr = grMgr;
     }

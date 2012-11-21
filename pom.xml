@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.mail.jira.plugins</groupId>
     <artifactId>groupeditfiedls</artifactId>
-    <version>1.0</version>
+    <version>2.0</version>
 
     <organization>
         <name>Andrey Markelov | Mail.Ru Group</name>
@@ -80,12 +80,12 @@
     </build>
 
     <properties>
-        <!-- <jira.version>5.2</jira.version>
+        <jira.version>5.2</jira.version>
         <jira.data.version>5.2</jira.data.version>
-        <amps.version>4.0</amps.version> -->
-        <jira.version>4.3.4</jira.version>
+        <amps.version>4.0</amps.version>
+        <!-- <jira.version>4.3.4</jira.version>
         <jira.data.version>4.3</jira.data.version>
-        <amps.version>3.8</amps.version>
+        <amps.version>3.8</amps.version> -->
     </properties>
 
 </project>
