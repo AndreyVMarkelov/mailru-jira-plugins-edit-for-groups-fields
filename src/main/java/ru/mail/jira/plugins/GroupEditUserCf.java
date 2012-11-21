@@ -43,24 +43,17 @@ public class GroupEditUserCf
      * Constructor.
      */
     public GroupEditUserCf(
-            CustomFieldValuePersister customFieldValuePersister,
-            UserConverter userConverter,
-            GenericConfigManager genericConfigManager,
-            ApplicationProperties applicationProperties,
-            JiraAuthenticationContext authenticationContext,
-            UserPickerSearchService searchService,
-            JiraBaseUrls jiraBaseUrls,
-            PluginData data,
-            GroupManager grMgr)
+        CustomFieldValuePersister customFieldValuePersister,
+        UserConverter userConverter,
+        GenericConfigManager genericConfigManager,
+        ApplicationProperties applicationProperties,
+        JiraAuthenticationContext authenticationContext,
+        UserPickerSearchService searchService,
+        JiraBaseUrls jiraBaseUrls,
+        PluginData data,
+        GroupManager grMgr)
     {
-        super(
-            customFieldValuePersister,
-            userConverter, 
-            genericConfigManager,
-            applicationProperties,
-            authenticationContext,
-            searchService,
-            jiraBaseUrls);
+        super(customFieldValuePersister, userConverter, genericConfigManager, applicationProperties, authenticationContext, searchService, jiraBaseUrls);
         this.data = data;
         this.grMgr = grMgr;
     }

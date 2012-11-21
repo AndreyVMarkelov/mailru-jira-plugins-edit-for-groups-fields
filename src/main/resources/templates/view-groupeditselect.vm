@@ -2,6 +2,6 @@
 ## Copyright Mail.Ru Group 2012. All rights reserved.
 #if($canView)
 #if ($value)
-  $!value.toString()
+ $!value.toString()
 #end
 #end

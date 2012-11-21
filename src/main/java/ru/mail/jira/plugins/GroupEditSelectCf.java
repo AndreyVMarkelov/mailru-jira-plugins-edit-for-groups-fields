@@ -51,13 +51,7 @@ public class GroupEditSelectCf
         PluginData data,
         GroupManager grMgr)
     {
-        super(
-            customFieldValuePersister,
-            stringConverter,
-            selectConverter,
-            optionsManager,
-            genericConfigManager,
-            jiraBaseUrls);
+        super(customFieldValuePersister, stringConverter, selectConverter, optionsManager, genericConfigManager, jiraBaseUrls);
         this.data = data;
         this.grMgr = grMgr;
     }

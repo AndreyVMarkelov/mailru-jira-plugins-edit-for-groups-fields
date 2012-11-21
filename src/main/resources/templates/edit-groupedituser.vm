@@ -13,4 +13,6 @@
 #end
 #end
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+#else
+#if($value)<input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>#end
 #end
