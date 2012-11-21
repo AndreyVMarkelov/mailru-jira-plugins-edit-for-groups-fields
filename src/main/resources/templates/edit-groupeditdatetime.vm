@@ -3,6 +3,7 @@
 #if($canView)
 $!{auiparams.put("controlHeaderClass", "aui-field-datepicker")}
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+#if($canEdit)
 ## Show the use checkbox field to use the current date/time when configuring the field in the admin section.
 #if ($displayParameters.defaultScreen)
     <input class="text medium-field datepicker-input" id="$customField.id" name="$customField.id" type="text" value="$!value" />
@@ -25,6 +26,14 @@ $!{auiparams.put("controlHeaderClass", "aui-field-datepicker")}
         <span class="aui-icon icon-date">$i18n.getText('date.picker.select.date')</span>
     </a>
     #datePopup(${customField.id} "${customField.id}-trigger" $dateTimeFormat $dateFormat $timeFormat $dateTimePicker $currentMillis $currentCalendar)
+#end
+#else
+#if($value)
+    <span title="This value cannot be edited">$value</span>
+    <input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>
+#else
+    <span title="This value cannot be edited">N/A</span>
+#end
 #end
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
 $!{auiparams.clear()}

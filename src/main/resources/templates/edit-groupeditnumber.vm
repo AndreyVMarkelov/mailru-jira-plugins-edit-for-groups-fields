@@ -2,6 +2,15 @@
 ## Copyright Mail.Ru Group 2012. All rights reserved.
 #if($canView)
 #customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+#if($canEdit)
 <input class="text long-field" id="$customField.id" name="$customField.id" type="text" value="$textutils.htmlEncode($!value)" />
+#else
+#if($value)
+    <span title="This value cannot be edited">$value</span>
+    <input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>
+#else
+    <span title="This value cannot be edited">N/A</span>
+#end
+#end
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
 #end
