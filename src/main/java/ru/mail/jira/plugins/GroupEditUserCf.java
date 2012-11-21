@@ -20,7 +20,6 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.groups.GroupManager;
-import com.atlassian.jira.user.UserHistoryManager;
 
 /**
  * User field.
@@ -44,18 +43,24 @@ public class GroupEditUserCf
      * Constructor.
      */
     public GroupEditUserCf(
-        CustomFieldValuePersister customFieldValuePersister,
-        UserConverter userConverter,
-        GenericConfigManager genericConfigManager,
-        ApplicationProperties applicationProperties,
-        JiraAuthenticationContext authenticationContext,
-        UserPickerSearchService searchService,
-        JiraBaseUrls jiraBaseUrls,
-        UserHistoryManager userHistoryManager,
-        PluginData data,
-        GroupManager grMgr)
+            CustomFieldValuePersister customFieldValuePersister,
+            UserConverter userConverter,
+            GenericConfigManager genericConfigManager,
+            ApplicationProperties applicationProperties,
+            JiraAuthenticationContext authenticationContext,
+            UserPickerSearchService searchService,
+            JiraBaseUrls jiraBaseUrls,
+            PluginData data,
+            GroupManager grMgr)
     {
-        super(customFieldValuePersister, userConverter, genericConfigManager, applicationProperties, authenticationContext, searchService, jiraBaseUrls, userHistoryManager);
+        super(
+            customFieldValuePersister,
+            userConverter, 
+            genericConfigManager,
+            applicationProperties,
+            authenticationContext,
+            searchService,
+            jiraBaseUrls);
         this.data = data;
         this.grMgr = grMgr;
     }
