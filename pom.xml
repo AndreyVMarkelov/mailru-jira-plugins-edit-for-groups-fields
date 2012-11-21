@@ -85,7 +85,7 @@
         <amps.version>4.0</amps.version> -->
         <jira.version>4.3.4</jira.version>
         <jira.data.version>4.3</jira.data.version>
-        <amps.version>3.8</amps.version>
+        <amps.version>3.11</amps.version>
     </properties>
 
 </project>

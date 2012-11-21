@@ -37,4 +37,6 @@ $!{auiparams.put("controlHeaderClass", "aui-field-datepicker")}
 #end
 #customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
 $!{auiparams.clear()}
+#else
+#if($value)<input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>#end
 #end
