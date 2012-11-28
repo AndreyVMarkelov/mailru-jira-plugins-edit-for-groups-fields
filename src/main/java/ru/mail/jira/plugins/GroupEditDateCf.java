@@ -8,6 +8,7 @@ import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.customfields.converters.DatePickerConverter;
 import com.atlassian.jira.issue.customfields.impl.DateCFType;
@@ -15,7 +16,9 @@ import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.history.DateTimeFieldChangeLogHelper;
 import com.atlassian.jira.security.groups.GroupManager;
+import com.atlassian.jira.util.DateFieldFormat;
 
 /**
  * Date field.
@@ -42,10 +45,13 @@ public class GroupEditDateCf
         CustomFieldValuePersister customFieldValuePersister,
         DatePickerConverter dateConverter,
         GenericConfigManager genericConfigManager,
+        DateTimeFieldChangeLogHelper dateTimeFieldChangeLogHelper,
+        DateFieldFormat dateFieldFormat,
+        DateTimeFormatterFactory dateTimeFormatterFactory,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, dateConverter, genericConfigManager);
+        super(customFieldValuePersister, dateConverter, genericConfigManager, dateTimeFieldChangeLogHelper, dateFieldFormat, dateTimeFormatterFactory);
         this.data = data;
         this.grMgr = grMgr;
     }

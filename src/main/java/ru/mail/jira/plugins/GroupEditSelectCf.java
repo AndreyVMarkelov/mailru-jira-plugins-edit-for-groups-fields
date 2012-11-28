@@ -9,8 +9,6 @@ import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.converters.SelectConverter;
-import com.atlassian.jira.issue.customfields.converters.StringConverter;
 import com.atlassian.jira.issue.customfields.impl.SelectCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.manager.OptionsManager;
@@ -43,15 +41,13 @@ public class GroupEditSelectCf
      */
     public GroupEditSelectCf(
         CustomFieldValuePersister customFieldValuePersister,
-        StringConverter stringConverter,
-        SelectConverter selectConverter,
         OptionsManager optionsManager,
         GenericConfigManager genericConfigManager,
         JiraBaseUrls jiraBaseUrls,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, stringConverter, selectConverter, optionsManager, genericConfigManager, jiraBaseUrls);
+        super(customFieldValuePersister, optionsManager, genericConfigManager, jiraBaseUrls);
         this.data = data;
         this.grMgr = grMgr;
     }
