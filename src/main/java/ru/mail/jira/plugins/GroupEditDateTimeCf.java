@@ -8,12 +8,15 @@ import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.config.properties.ApplicationProperties;
+import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.customfields.impl.DateTimeCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
+import com.atlassian.jira.issue.history.DateTimeFieldChangeLogHelper;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.groups.GroupManager;
 
@@ -41,11 +44,14 @@ public class GroupEditDateTimeCf
     public GroupEditDateTimeCf(
         CustomFieldValuePersister customFieldValuePersister,
         GenericConfigManager genericConfigManager,
-        JiraAuthenticationContext authenticationContext,
+        DateTimeFormatterFactory dateTimeFormatterFactory,
+        JiraAuthenticationContext jiraAuthenticationContext,
+        ApplicationProperties applicationProperties,
+        DateTimeFieldChangeLogHelper dateTimeFieldChangeLogHelper,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, genericConfigManager, authenticationContext);
+        super(customFieldValuePersister, genericConfigManager, dateTimeFormatterFactory, jiraAuthenticationContext, applicationProperties, dateTimeFieldChangeLogHelper);
         this.data = data;
         this.grMgr = grMgr;
     }
