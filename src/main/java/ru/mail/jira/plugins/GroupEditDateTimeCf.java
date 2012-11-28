@@ -7,7 +7,7 @@ package ru.mail.jira.plugins;
 import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
@@ -67,7 +67,7 @@ public class GroupEditDateTimeCf
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())
         {
-            User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
+            User user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
             for (String group : fieldData.getGroups())
             {
                 Group grObj = grMgr.getGroupObject(group);

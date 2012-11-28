@@ -63,7 +63,7 @@ public class GroupEditService
     @Produces({MediaType.APPLICATION_JSON})
     public Response configureField(@Context HttpServletRequest req)
     {
-        JiraAuthenticationContext authCtx = ComponentManager.getInstance().getJiraAuthenticationContext();
+        JiraAuthenticationContext authCtx = ComponentAccessor.getJiraAuthenticationContext();
         I18nHelper i18n = authCtx.getI18nHelper();
         User user = authCtx.getLoggedInUser();
         if (user == null)
@@ -109,7 +109,7 @@ public class GroupEditService
     @Produces({MediaType.APPLICATION_JSON})
     public Response initConfigureDialog(@Context HttpServletRequest req)
     {
-        JiraAuthenticationContext authCtx = ComponentManager.getInstance().getJiraAuthenticationContext();
+        JiraAuthenticationContext authCtx = ComponentAccessor.getJiraAuthenticationContext();
         I18nHelper i18n = authCtx.getI18nHelper();
         User user = authCtx.getLoggedInUser();
         if (user == null)

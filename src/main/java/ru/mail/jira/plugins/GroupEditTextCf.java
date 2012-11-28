@@ -7,9 +7,9 @@ package ru.mail.jira.plugins;
 import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.TextCFType;
+import com.atlassian.jira.issue.customfields.impl.GenericTextCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -22,7 +22,7 @@ import com.atlassian.jira.security.groups.GroupManager;
  * @author Andrey Markelov
  */
 public class GroupEditTextCf
-    extends TextCFType
+    extends GenericTextCFType
 {
     /**
      * Plugin data.
@@ -59,7 +59,7 @@ public class GroupEditTextCf
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())
         {
-            User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
+            User user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
             for (String group : fieldData.getGroups())
             {
                 Group grObj = grMgr.getGroupObject(group);
