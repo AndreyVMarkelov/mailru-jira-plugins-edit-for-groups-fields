@@ -1,5 +1,5 @@
 /*
- * Created by Andrey Markelov 19-11-2012.
+ * Created by Andrey Markelov 11-12-2012.
  * Copyright Mail.Ru Group 2012. All rights reserved.
  */
 package ru.mail.jira.plugins;
@@ -9,7 +9,7 @@ import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.TextCFType;
+import com.atlassian.jira.issue.customfields.impl.TextAreaCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -17,12 +17,12 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
- * Text field.
+ * Text area.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditTextCf
-    extends TextCFType
+public class GroupEditAreaCf
+    extends TextAreaCFType
 {
     /**
      * Plugin data.
@@ -37,7 +37,7 @@ public class GroupEditTextCf
     /**
      * Constructor.
      */
-    public GroupEditTextCf(
+    public GroupEditAreaCf(
         CustomFieldValuePersister customFieldValuePersister,
         GenericConfigManager genericConfigManager,
         PluginData data,

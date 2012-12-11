@@ -7,7 +7,7 @@ package ru.mail.jira.plugins;
 import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.datetime.DateTimeFormatterFactory;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.customfields.converters.DatePickerConverter;
@@ -63,11 +63,11 @@ public class GroupEditDateCf
         FieldLayoutItem fieldLayoutItem)
     {
         FieldStoreData fieldData = data.getFieldData(field.getId());
+        User user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
         boolean canEdit = false;
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())
         {
-            User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
             for (String group : fieldData.getGroups())
             {
                 Group grObj = grMgr.getGroupObject(group);
@@ -85,6 +85,29 @@ public class GroupEditDateCf
         if (canEdit)
         {
             canView = true;
+        }
+        else
+        {
+            if (issue != null && issue.getKey() != null)
+            {
+                User aUser = issue.getAssignee();
+                User rUser = issue.getReporter();
+
+                if ((aUser != null && fieldData.isVisibleToAssigneeOnly() && aUser.equals(user)) ||
+                    (rUser != null && fieldData.isVisibleToReporterOnly() && rUser.equals(user)))
+                {
+                    canEdit = true;
+                    canView = true;
+                }
+            }
+            else
+            {
+                if (fieldData.isVisibleToReporterOnly())
+                {
+                    canEdit = true;
+                    canView = true;
+                }
+            }
         }
 
         Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);

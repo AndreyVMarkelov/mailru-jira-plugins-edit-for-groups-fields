@@ -65,6 +65,15 @@
         <resource type="velocity" name="xml" location="templates/xml-groupeditselect.vm"/>
     </customfield-type>
 
+    <customfield-type key="edit-groups-cf-area"
+                      name="Enabled for groups Text Area Custom Field"
+                      class="ru.mail.jira.plugins.GroupEditAreaCf">
+        <description>This textarea field is enabled for selected groups</description>
+        <resource type="velocity" name="view" location="templates/view-groupeditarea.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-groupeditarea.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-groupeditarea.vm"/>
+    </customfield-type>
+
     <!-- Searchers -->
 
     <!-- Text Searchers -->
@@ -75,6 +84,7 @@
         <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
         <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-text"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="edit-groups-cf-area"/>
     </customfield-searcher>
 
     <customfield-searcher key="exacttextsearcher"

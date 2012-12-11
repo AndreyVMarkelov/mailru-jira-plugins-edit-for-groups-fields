@@ -19,18 +19,32 @@ public class FieldStoreData
     private List<String> groups;
 
     /**
+     * Is visible to assignee only?
+     */
+    private boolean visibleToAssigneeOnly;
+
+    /**
      * Is visible to other?
      */
     private boolean visibleToOther;
+
+    /**
+     * Is visible to reporter only?
+     */
+    private boolean visibleToReporterOnly;
 
     /**
      * Constructor.
      */
     public FieldStoreData(
         boolean visibleToOther,
+        boolean visibleToAssigneeOnly,
+        boolean visibleToReporterOnly,
         List<String> groups)
     {
         this.visibleToOther = visibleToOther;
+        this.visibleToAssigneeOnly = visibleToAssigneeOnly;
+        this.visibleToReporterOnly = visibleToReporterOnly;
         this.groups = groups;
     }
 
@@ -39,15 +53,26 @@ public class FieldStoreData
         return groups;
     }
 
+    public boolean isVisibleToAssigneeOnly()
+    {
+        return visibleToAssigneeOnly;
+    }
+
     public boolean isVisibleToOther()
     {
         return visibleToOther;
+    }
+
+    public boolean isVisibleToReporterOnly()
+    {
+        return visibleToReporterOnly;
     }
 
     @Override
     public String toString()
     {
         return "FieldStoreData[groups=" + groups + ", visibleToOther="
-            + visibleToOther + "]";
+           + visibleToOther + ", visibleToReporterOnly=" + visibleToReporterOnly + ", visibleToAssigneeOnly="
+           + visibleToAssigneeOnly + "]";
     }
 }
