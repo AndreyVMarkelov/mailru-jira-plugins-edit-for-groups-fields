@@ -1,5 +1,5 @@
 /*
- * Created by Andrey Markelov 19-11-2012.
+ * Created by Andrey Markelov 11-12-2012.
  * Copyright Mail.Ru Group 2012. All rights reserved.
  */
 package ru.mail.jira.plugins;
@@ -9,22 +9,20 @@ import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.impl.SelectCFType;
+import com.atlassian.jira.issue.customfields.impl.TextAreaCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
-import com.atlassian.jira.issue.customfields.manager.OptionsManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
-import com.atlassian.jira.issue.fields.rest.json.beans.JiraBaseUrls;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
- * Select field.
+ * Text area.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditSelectCf
-    extends SelectCFType
+public class GroupEditAreaCf
+    extends TextAreaCFType
 {
     /**
      * Plugin data.
@@ -39,15 +37,13 @@ public class GroupEditSelectCf
     /**
      * Constructor.
      */
-    public GroupEditSelectCf(
+    public GroupEditAreaCf(
         CustomFieldValuePersister customFieldValuePersister,
-        OptionsManager optionsManager,
         GenericConfigManager genericConfigManager,
-        JiraBaseUrls jiraBaseUrls,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, optionsManager, genericConfigManager, jiraBaseUrls);
+        super(customFieldValuePersister, genericConfigManager);
         this.data = data;
         this.grMgr = grMgr;
     }

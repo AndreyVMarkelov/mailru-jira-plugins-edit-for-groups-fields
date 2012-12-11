@@ -42,20 +42,56 @@ public class PluginDataImpl
         String strData = getStringProperty(cfId + ".data");
         if (strData == null || strData.length() == 0)
         {
-            return new FieldStoreData(false, new ArrayList<String>());
+            return new FieldStoreData(false, false, false, new ArrayList<String>());
         }
 
         int inx = strData.indexOf("||");
         if (inx > 0)
         {
             String boolStr = strData.substring(0, inx);
+            //--> change boolean part
+            boolean visibleToAssigneeOnly = false;
+            boolean visibleToOther = false;
+            boolean visibleToReporterOnly = false;
+            int sinx = boolStr.indexOf("#");
+            if (sinx > 0)
+            {
+                String first = boolStr.substring(0, sinx);
+                String second = boolStr.substring(sinx + 1, inx);
+                visibleToOther = Boolean.parseBoolean(second);
+                if (first.equals("0"))
+                {
+                    visibleToAssigneeOnly = false;
+                    visibleToReporterOnly = false;
+                }
+                else if (first.equals("1"))
+                {
+                    visibleToAssigneeOnly = true;
+                    visibleToReporterOnly = false;
+                }
+                else if (first.equals("2"))
+                {
+                    visibleToAssigneeOnly = false;
+                    visibleToReporterOnly = true;
+                }
+                else if (first.equals("3"))
+                {
+                    visibleToAssigneeOnly = true;
+                    visibleToReporterOnly = true;
+                }
+            }
+            else
+            {
+                visibleToOther = Boolean.parseBoolean(boolStr);
+            }
+
             String groupsStr = strData.substring(inx + 2);
 
-            return new FieldStoreData(Boolean.parseBoolean(boolStr), strToList(groupsStr));
+            return new FieldStoreData(visibleToOther, visibleToAssigneeOnly, visibleToReporterOnly, strToList(groupsStr));
         }
         else
         {
-            return new FieldStoreData(false, new ArrayList<String>());
+            return new FieldStoreData(false, false, false, new ArrayList<String>());
         }
     }
 
@@ -89,7 +125,27 @@ public class PluginDataImpl
         String cfId,
         FieldStoreData data)
     {
-        setStringProperty(cfId + ".data", data.isVisibleToOther() + "||" + listToString(data.getGroups()));
+        StringBuilder sb = new StringBuilder();
+        if (data.isVisibleToAssigneeOnly() && data.isVisibleToReporterOnly())
+        {
+            sb.append("3");
+        }
+        else if (!data.isVisibleToAssigneeOnly() && data.isVisibleToReporterOnly())
+        {
+            sb.append("2");
+        }
+        else if (data.isVisibleToAssigneeOnly() && !data.isVisibleToReporterOnly())
+        {
+            sb.append("1");
+        }
+        else
+        {
+            sb.append("0");
+        }
+
+        sb.append("#").append(data.isVisibleToOther()).append("||").append(listToString(data.getGroups()));
+
+        setStringProperty(cfId + ".data", sb.toString());
     }
 
     private List<String> strToList(String str)

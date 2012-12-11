@@ -1,0 +1,18 @@
+## Created by Andrey Markelov 11-12-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#if($canView)
+#customControlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters $auiparams)
+#if($canEdit)
+    <textarea class="textarea long-field" cols="40" id="$customField.id" name="$customField.id" rows="5">$textutils.htmlEncode($!value)</textarea>
+#else
+    #if($value)
+    <span title="This value cannot be edited">$value</span>
+    <input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>
+    #else
+    <span title="This value cannot be edited">N/A</span>
+    #end
+#end
+#customControlFooter ($action $customField.id $fieldLayoutItem.fieldDescription $displayParameters $auiparams)
+#else
+#if($value)<input id="$customField.id" name="$customField.id" type="hidden" value="$value"/>#end
+#end
