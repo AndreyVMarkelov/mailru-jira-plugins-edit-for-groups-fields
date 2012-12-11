@@ -25,5 +25,21 @@
                 <input #if($storedData.isVisibleToOther())checked="checked"#end type="checkbox" id="uservisible" name="uservisible" value="true"/>
             </td>
         </tr>
+        <tr>
+            <td valign="top">
+                <b>$i18n.getText("edit-groups-cf.allowreporter")</b>
+            </td>
+            <td valign="top">
+                <input #if($storedData.isVisibleToReporterOnly())checked="checked"#end type="checkbox" id="reportervisible" name="reportervisible" value="true"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <b>$i18n.getText("edit-groups-cf.allowassignee")</b>
+            </td>
+            <td valign="top">
+                <input #if($storedData.isVisibleToAssigneeOnly())checked="checked"#end type="checkbox" id="assigneevisible" name="assigneevisible" value="true"/>
+            </td>
+        </tr>
     </table>
 </form>

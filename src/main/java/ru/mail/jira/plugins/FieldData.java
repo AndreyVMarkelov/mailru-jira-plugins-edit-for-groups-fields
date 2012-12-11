@@ -44,9 +44,19 @@ public class FieldData
     private List<String> groups;
 
     /**
+     * Is visible to assignee only?
+     */
+    private boolean visibleToAssigneeOnly;
+
+    /**
      * Is visible to other?
      */
     private boolean visibleToOther;
+
+    /**
+     * Is visible to reporter only?
+     */
+    private boolean visibleToReporterOnly;
 
     /**
      * Constructor.
@@ -89,9 +99,19 @@ public class FieldData
         return allProjects;
     }
 
+    public boolean isVisibleToAssigneeOnly()
+    {
+        return visibleToAssigneeOnly;
+    }
+
     public boolean isVisibleToOther()
     {
         return visibleToOther;
+    }
+
+    public boolean isVisibleToReporterOnly()
+    {
+        return visibleToReporterOnly;
     }
 
     public void setAllProjects(boolean allProjects)
@@ -104,15 +124,17 @@ public class FieldData
         this.cfType = cfType;
     }
 
-    public void setFieldStoreData(FieldStoreData storedData)
-    {
-        this.visibleToOther = storedData.isVisibleToOther();
-        this.groups = storedData.getGroups();
-    }
-
     public void setFieldProjs(List<String> fieldProjs)
     {
         this.fieldProjs = fieldProjs;
+    }
+
+    public void setFieldStoreData(FieldStoreData storedData)
+    {
+        this.visibleToOther = storedData.isVisibleToOther();
+        this.visibleToAssigneeOnly = storedData.isVisibleToAssigneeOnly();
+        this.visibleToReporterOnly = storedData.isVisibleToReporterOnly();
+        this.groups = storedData.getGroups();
     }
 
     public void setGroups(List<String> groups)
@@ -120,9 +142,19 @@ public class FieldData
         this.groups = groups;
     }
 
+    public void setVisibleToAssigneeOnly(boolean visibleToAssigneeOnly)
+    {
+        this.visibleToAssigneeOnly = visibleToAssigneeOnly;
+    }
+
     public void setVisibleToOther(boolean visibleToOther)
     {
         this.visibleToOther = visibleToOther;
+    }
+
+    public void setVisibleToReporterOnly(boolean visibleToReporterOnly)
+    {
+        this.visibleToReporterOnly = visibleToReporterOnly;
     }
 
     @Override
@@ -130,7 +162,8 @@ public class FieldData
     {
         return "FieldData[allProjects=" + allProjects + ", cfId=" + cfId
             + ", cfName=" + cfName + ", cfType=" + cfType + ", fieldProjs="
-            + fieldProjs + ", groups=" + groups + ", visibleToOther="
-            + visibleToOther + "]";
+            + fieldProjs + ", groups=" + groups + ", visibleToAssigneeOnly="
+            + visibleToAssigneeOnly + ", visibleToOther=" + visibleToOther
+            + ", visibleToReporterOnly=" + visibleToReporterOnly + "]";
     }
 }

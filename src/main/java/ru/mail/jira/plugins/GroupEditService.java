@@ -63,7 +63,7 @@ public class GroupEditService
     @Produces({MediaType.APPLICATION_JSON})
     public Response configureField(@Context HttpServletRequest req)
     {
-        JiraAuthenticationContext authCtx = ComponentManager.getInstance().getJiraAuthenticationContext();
+        JiraAuthenticationContext authCtx = ComponentAccessor.getJiraAuthenticationContext();
         I18nHelper i18n = authCtx.getI18nHelper();
         User user = authCtx.getLoggedInUser();
         if (user == null)
@@ -83,6 +83,8 @@ public class GroupEditService
         String[] selUsers = req.getParameterValues("selgroups");
         String cfIdStr = req.getParameter("cfId");
         String uservisible = req.getParameter("uservisible");
+        String assigneevisible = req.getParameter("assigneevisible");
+        String reportervisible = req.getParameter("reportervisible");
         if (cfIdStr == null || cfIdStr.length() == 0)
         {
             log.error("GroupEditService::configureField - Required parameters are not set");
@@ -90,14 +92,16 @@ public class GroupEditService
         }
 
         boolean visibleToOther = (uservisible != null && Boolean.parseBoolean(uservisible)) ? true : false;
+        boolean visibleToAssigneeOnly = (assigneevisible != null && Boolean.parseBoolean(assigneevisible)) ? true : false;
+        boolean visibleToReporterOnly = (reportervisible != null && Boolean.parseBoolean(reportervisible)) ? true : false;
         FieldStoreData sfd;
         if (selUsers != null)
         {
-            sfd = new FieldStoreData(visibleToOther, Arrays.asList(selUsers));
+            sfd = new FieldStoreData(visibleToOther, visibleToAssigneeOnly, visibleToReporterOnly, Arrays.asList(selUsers));
         }
         else
         {
-            sfd = new FieldStoreData(visibleToOther, null);
+            sfd = new FieldStoreData(visibleToOther, visibleToAssigneeOnly, visibleToReporterOnly, null);
         }
         data.storeFieldData(cfIdStr, sfd);
 
@@ -109,7 +113,7 @@ public class GroupEditService
     @Produces({MediaType.APPLICATION_JSON})
     public Response initConfigureDialog(@Context HttpServletRequest req)
     {
-        JiraAuthenticationContext authCtx = ComponentManager.getInstance().getJiraAuthenticationContext();
+        JiraAuthenticationContext authCtx = ComponentAccessor.getJiraAuthenticationContext();
         I18nHelper i18n = authCtx.getI18nHelper();
         User user = authCtx.getLoggedInUser();
         if (user == null)

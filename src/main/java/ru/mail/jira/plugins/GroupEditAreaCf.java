@@ -1,5 +1,5 @@
 /*
- * Created by Andrey Markelov 19-11-2012.
+ * Created by Andrey Markelov 11-12-2012.
  * Copyright Mail.Ru Group 2012. All rights reserved.
  */
 package ru.mail.jira.plugins;
@@ -7,10 +7,10 @@ package ru.mail.jira.plugins;
 import java.util.Map;
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
-import com.atlassian.jira.ComponentManager;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.Issue;
-import com.atlassian.jira.issue.customfields.converters.DoubleConverter;
-import com.atlassian.jira.issue.customfields.impl.NumberCFType;
+import com.atlassian.jira.issue.customfields.converters.StringConverter;
+import com.atlassian.jira.issue.customfields.impl.TextAreaCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -18,12 +18,12 @@ import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.security.groups.GroupManager;
 
 /**
- * Number field.
+ * Text area.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditNumberCf
-    extends NumberCFType
+public class GroupEditAreaCf
+    extends TextAreaCFType
 {
     /**
      * Plugin data.
@@ -38,14 +38,14 @@ public class GroupEditNumberCf
     /**
      * Constructor.
      */
-    public GroupEditNumberCf(
+    public GroupEditAreaCf(
         CustomFieldValuePersister customFieldValuePersister,
-        DoubleConverter doubleConverter,
+        StringConverter stringConverter,
         GenericConfigManager genericConfigManager,
         PluginData data,
         GroupManager grMgr)
     {
-        super(customFieldValuePersister, doubleConverter, genericConfigManager);
+        super(customFieldValuePersister, stringConverter, genericConfigManager);
         this.data = data;
         this.grMgr = grMgr;
     }
@@ -57,7 +57,7 @@ public class GroupEditNumberCf
         FieldLayoutItem fieldLayoutItem)
     {
         FieldStoreData fieldData = data.getFieldData(field.getId());
-        User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
+        User user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser();
         boolean canEdit = false;
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())

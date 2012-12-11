@@ -55,11 +55,11 @@ public class GroupEditTextCf
         FieldLayoutItem fieldLayoutItem)
     {
         FieldStoreData fieldData = data.getFieldData(field.getId());
+        User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
         boolean canEdit = false;
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())
         {
-            User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
             for (String group : fieldData.getGroups())
             {
                 Group grObj = grMgr.getGroupObject(group);
@@ -77,6 +77,29 @@ public class GroupEditTextCf
         if (canEdit)
         {
             canView = true;
+        }
+        else
+        {
+            if (issue != null && issue.getKey() != null)
+            {
+                User aUser = issue.getAssigneeUser();
+                User rUser = issue.getReporterUser();
+
+                if ((aUser != null && fieldData.isVisibleToAssigneeOnly() && aUser.equals(user)) ||
+                    (rUser != null && fieldData.isVisibleToReporterOnly() && rUser.equals(user)))
+                {
+                    canEdit = true;
+                    canView = true;
+                }
+            }
+            else
+            {
+                if (fieldData.isVisibleToReporterOnly())
+                {
+                    canEdit = true;
+                    canView = true;
+                }
+            }
         }
 
         Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);

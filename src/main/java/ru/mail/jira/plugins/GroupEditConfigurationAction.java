@@ -75,6 +75,7 @@ public class GroupEditConfigurationAction
                 cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-user") ||
                 cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-date") ||
                 cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-datetime") ||
+                cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-area") ||
                 cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-select"))
             {
                 FieldData fData = new FieldData(cf.getId(), cf.getName());
@@ -115,6 +116,10 @@ public class GroupEditConfigurationAction
                 else if (cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-datetime"))
                 {
                     fData.setCfType("edit-groups-cf.basicdatetime");
+                }
+                else if (cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-area"))
+                {
+                    fData.setCfType("edit-groups-cf.basicarea");
                 }
                 else if (cf.getCustomFieldType().getKey().equals("ru.mail.jira.plugins.groupeditfiedls:edit-groups-cf-select"))
                 {
