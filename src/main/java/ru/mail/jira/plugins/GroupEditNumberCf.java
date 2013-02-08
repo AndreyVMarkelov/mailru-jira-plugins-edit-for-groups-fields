@@ -107,6 +107,8 @@ public class GroupEditNumberCf
         Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
         params.put("canEdit", canEdit);
         params.put("canView", canView);
+        
+        Utils.addViewAndEditParameters(params, field.getId());
 
         return params;
     }

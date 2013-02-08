@@ -5,6 +5,7 @@
 package ru.mail.jira.plugins;
 
 import java.util.Map;
+
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
@@ -107,6 +108,8 @@ public class GroupEditDateTimeCf
         Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
         params.put("canEdit", canEdit);
         params.put("canView", canView);
+        
+        Utils.addViewAndEditParameters(params, field.getId());
 
         return params;
     }

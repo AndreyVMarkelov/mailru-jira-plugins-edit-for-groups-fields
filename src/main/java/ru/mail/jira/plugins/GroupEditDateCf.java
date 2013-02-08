@@ -1,10 +1,12 @@
 /*
- * Created by Andrey Markelov 19-11-2012.
- * Copyright Mail.Ru Group 2012. All rights reserved.
+ * Created by Andrey Markelov 19-11-2012. Copyright Mail.Ru Group 2012. All
+ * rights reserved.
  */
 package ru.mail.jira.plugins;
 
+
 import java.util.Map;
+
 import com.atlassian.crowd.embedded.api.Group;
 import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.ComponentManager;
@@ -17,13 +19,13 @@ import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 import com.atlassian.jira.security.groups.GroupManager;
 
+
 /**
  * Date field.
  * 
  * @author Andrey Markelov
  */
-public class GroupEditDateCf
-    extends DateCFType
+public class GroupEditDateCf extends DateCFType
 {
     /**
      * Plugin data.
@@ -38,11 +40,9 @@ public class GroupEditDateCf
     /**
      * Constructor.
      */
-    public GroupEditDateCf(
-        CustomFieldValuePersister customFieldValuePersister,
+    public GroupEditDateCf(CustomFieldValuePersister customFieldValuePersister,
         DatePickerConverter dateConverter,
-        GenericConfigManager genericConfigManager,
-        PluginData data,
+        GenericConfigManager genericConfigManager, PluginData data,
         GroupManager grMgr)
     {
         super(customFieldValuePersister, dateConverter, genericConfigManager);
@@ -51,13 +51,12 @@ public class GroupEditDateCf
     }
 
     @Override
-    public Map<String, Object> getVelocityParameters(
-        Issue issue,
-        CustomField field,
-        FieldLayoutItem fieldLayoutItem)
+    public Map<String, Object> getVelocityParameters(Issue issue,
+        CustomField field, FieldLayoutItem fieldLayoutItem)
     {
         FieldStoreData fieldData = data.getFieldData(field.getId());
-        User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
+        User user = ComponentManager.getInstance()
+            .getJiraAuthenticationContext().getLoggedInUser();
         boolean canEdit = false;
         boolean canView = fieldData.isVisibleToOther();
         if (fieldData.getGroups() != null && !fieldData.getGroups().isEmpty())
@@ -87,8 +86,10 @@ public class GroupEditDateCf
                 User aUser = issue.getAssigneeUser();
                 User rUser = issue.getReporterUser();
 
-                if ((aUser != null && fieldData.isVisibleToAssigneeOnly() && aUser.equals(user)) ||
-                    (rUser != null && fieldData.isVisibleToReporterOnly() && rUser.equals(user)))
+                if ((aUser != null && fieldData.isVisibleToAssigneeOnly() && aUser
+                    .equals(user))
+                    || (rUser != null && fieldData.isVisibleToReporterOnly() && rUser
+                        .equals(user)))
                 {
                     canEdit = true;
                     canView = true;
@@ -104,9 +105,12 @@ public class GroupEditDateCf
             }
         }
 
-        Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
+        Map<String, Object> params = super.getVelocityParameters(issue, field,
+            fieldLayoutItem);
         params.put("canEdit", canEdit);
         params.put("canView", canView);
+
+        Utils.addViewAndEditParameters(params, field.getId());
 
         return params;
     }
